@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Input Telemetry Settings</title>
+        <link rel="stylesheet" href="../stylesheets/style.css">
+        <script src ="../socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <div class="preview">
+            <img src="../images/inputTelemetry.png" class="preview"/>
+        </div>
+        <div style="padding-top: 5%;"></div>
+        <div class="settings">
+            <p id="link"></p>
+            <table style="width:100%; table-layout: fixed; background-color: transparent;">
+                <tr>
+                    <td>
+                        <button id="toggleInputTelemetry" class="toggleButton">Toggle Overlay</button>
+                    </td>
+                    <td>
+                        <button id="lockInputTelemetry" class="toggleButton">Lock Overlay</button>
+                    </td>
+                    <td class="zoomslidecontainer" style="column-span:2;">
+                        <label for="zoomRange" style="text-align: left; width:80px; display:inline-block; padding-left: 10px;">Scale: 10</label>
+                        <input type="range" min="5" max="30" value="10" class="zoomslider" id="zoomRange"/>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="zoomslidecontainer" style="column-span:2;">
+                        <label for="timeRange" style="text-align: left; width:120px; display:inline-block; padding-left: 10px;">Duration: 4s</label>
+                        <input type="range" min="1" max="20" value="4" class="zoomslider" id="timeRange"/>
+                    </td>
+
+                </tr>
+            </table>
+            
+            
+        </div>
+    </body>
+</html>
+<script>
+    var socket = io(); 
+    socket.emit('getInputTelemetryOverlayStatus',(callback)=>{
+        if(callback.enabled){
+            document.getElementById('toggleInputTelemetry').style.backgroundColor='#00B7FF'
+        }
+        if(callback.locked){
+            document.getElementById('lockInputTelemetry').style.backgroundColor='#00B7FF'
+        }
+        document.getElementById('zoomRange').value = callback.zoom;
+        document.getElementById('zoomRange').previousElementSibling.innerHTML = 'Scale: ' + callback.zoom;
+        
+        document.getElementById('timeRange').value = callback.time;
+        document.getElementById('timeRange').previousElementSibling.innerHTML = 'Duration: ' + callback.time + 's';
+        document.getElementById("link").innerHTML = "localhost:"+callback.port+"/inputTelemetry"
+    });
+    document.getElementById('toggleInputTelemetry').onclick = ()=>{
+        socket.emit('openInputTelemetry',(callback)=>{
+            var button = document.getElementById('toggleInputTelemetry')
+            if(callback.enabled){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        });
+    }
+    document.getElementById('zoomRange').oninput = ()=>{
+        document.getElementById('zoomRange').previousElementSibling.innerHTML = 'Scale: ' + zoomRange.value;
+        socket.emit('inputTelemetryZoomChanged',document.getElementById('zoomRange').value)
+    }
+    document.getElementById('timeRange').oninput = ()=>{
+        document.getElementById('timeRange').previousElementSibling.innerHTML = "Duration: " + timeRange.value + "s";
+        socket.emit('inputTelemetryTimeRangeChanged',document.getElementById('timeRange').value)
+    }
+    document.getElementById('lockInputTelemetry').onclick = ()=> {
+        socket.emit("lockInputTelemetry",(callback)=>{
+            var button = document.getElementById('lockInputTelemetry')
+            if(callback.locked){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        })
+    }
+    socket.on('inputTelemetryZoomChanged',(zoom)=>{
+            var zoomRange = document.getElementById('zoomRange');
+            zoomRange.value = zoom;
+            zoomRange.previousElementSibling.innerHTML = 'Scale: ' + zoom;
+    });
+</script>

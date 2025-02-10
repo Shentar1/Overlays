@@ -1,0 +1,273 @@
+body {
+  overflow: hidden;
+  margin:0px;
+  padding: 0px;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+.preview{
+  display: block;
+  margin-left: auto; 
+  margin-right: auto;
+  height:250px;
+  background-color: #666f;
+}
+.draggable{
+  -webkit-app-region: drag;
+}
+a {
+  color: #00B7FF;
+}
+label{
+  color: white;
+}
+.numberUpDown{
+  width: 50px;
+}
+table{
+  background-color: #00000088;
+  color:white;
+  font-weight:600;
+  border-spacing:0px;
+}
+th{
+  font-weight: 900;
+}
+#fuelTable{
+  font-size:14px;
+  transform-origin: 0 0;
+}
+#fuelTable thead tr th{
+  font-size:14px;
+  border-bottom:1px #ff7b00 solid;
+}
+td{
+  text-wrap: nowrap;
+  text-overflow:ellipsis;
+}
+tr:nth-child(even),thead{
+  background-color: #00000088;
+}
+.Sidebar{
+  vertical-align: top;
+  display: inline-block;
+  width: 25%;
+  height: 100vh;
+}
+.SidebarButton{
+  display:block;
+  width: 100%;
+  padding:1px 0;
+  min-height: 50px;
+  text-align: center;
+  font-size: 32px;
+  font-weight:bolder;
+  text-decoration:none;
+  color:#AAAAAA;
+  background-color: #222f;
+}
+.SidebarButton:hover{
+  background-color: #666f;
+}
+#settingsDiv{
+  vertical-align: top;
+  padding-top:1%;
+  width: 75%;
+  display: inline-block;
+  height: 100vh;
+}
+#GlobalSettings{
+  position:absolute;
+  bottom:0px;
+  width: 25%;
+}
+.settings{
+  font-size: 18px;
+}
+.settings>div{
+  padding-left: 1%;
+  padding-top:5px;
+  font-weight: 500;
+}
+.settings button{
+  border-radius: 4px;
+  border-width: 1px;
+  background-color:#111f;
+  color: white;
+  font-size: 22px;
+  font-weight: 600;
+  width: 100%;
+  height: 40px;
+}
+.settings table tbody tr td{
+  padding-bottom: 10px;
+}
+.settings table tbody tr:nth-child(even){
+  background-color: transparent;
+}
+#link{
+  background-color: black;
+  color:white;
+  width: 100%;
+  padding-left: 1%;
+}
+.toolbarButton{
+  -webkit-app-region: no-drag;
+  height: 20px;
+  width:20px;
+  float: right;
+  background-color: transparent;
+  border: none;
+  margin: 2px;
+}
+#close{
+  background-image: url('../images/whiteX.png');
+}
+#close:hover{
+  background-image: url('../images/blackX.png');
+}
+#minimize{
+  background-image: url('../images/whiteMinus.png');
+}
+#minimize:hover{
+  background-image: url('../images/blackMinus.png');
+}
+#HideOverlays{
+  -webkit-app-region:no-drag;
+  width: 100px;
+  color:white;
+  border-radius: 1px;
+  border-width: 1px;
+  text-align: center;
+  padding: 1px;
+}
+.overlaysShownButton{
+  background-color: #000;
+  border:solid;
+  border-color: #00B7FF;
+}
+.overlaysHiddenButton{
+  background-color: #00B7FF;
+  border:solid;
+  border-color: #000;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 17px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 2px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(12px);
+  -ms-transform: translateX(12px);
+  transform: translateX(12px);
+}
+#inputDisplay{
+  width: 50px;
+  height: 90px;
+  display: block;
+}
+.fuelslidecontainer {
+  column-span: 2;
+}
+
+/* The slider itself */
+.zoomslider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 10px; /* Specified height */
+  border-radius:5px;
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .4s; /* 0.2 seconds transition on hover */
+  transition: opacity .4s;
+}
+
+/* Mouse-over effects */
+.zoomslider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.zoomslider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #2196F3; /* Green background */
+  border-radius:50%;
+  cursor: pointer; /* Cursor on hover */
+}
+
+.zoomslider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #2196F3; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+#telemetryChart{
+  background-color: #00000088;
+  width: 300px;
+  height:100px;
+}
+#header, #footer{
+  display:table; 
+  table-layout: fixed;
+  background-color: #000000c8; 
+  color:white;
+  text-align:center; 
+  font-size: 12px;
+}
+#header{
+  border-bottom:2px solid #00B7FF;
+}
+#footer{
+  border-top:2px solid #00B7FF;
+}
+#header>div,#footer>div{
+  
+  display:none; 
+  width:33%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  script(src='javascripts/fuelCalculator.js')
+  table(id='fuelTable', class="draggable", style="width:338px")
+    div(id="header", style="width:338px;")
+      div(id="header1")
+      div(id="header2")
+      div(id="header3")
+    thead(style="vertical-align:bottom; text-align:center")
+      tr
+        th(id="currentFuel", style="width:15%") 
+          |Fuel:
+          br
+          | 00.00
+        th(style="width: 30%") Laps Remaining:
+        th(style="width: 27%") Fuel Per Lap:
+        th(style="width: 27%") Fuel To Add:
+    tbody(style="text-align:center")
+      tr 
+        th Avg: 
+        td(id="avgLapsRemaining") 00.00 
+        td(id="avgFuelPerLap") 00.00 
+        td(id="avgFuelToAdd") 00.00
+      tr 
+        th Max: 
+        td(id="maxLapsRemaining") 00.00 
+        td(id="maxFuelPerLap") 00.00 
+        td(id="maxFuelToAdd") 00.00
+      tr 
+        th Min: 
+        td(id="minLapsRemaining") 00.00 
+        td(id="minFuelPerLap") 00.00 
+        td(id="minFuelToAdd") 00.00
+  div(id="footer", style="width:338px")
+    div(id="footer1")
+    div(id="footer2")
+    div(id="footer3")

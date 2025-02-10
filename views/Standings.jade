@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    script(src="javascripts/standings.js")
+    table(class="draggable", style="font-size: 14px;")
+        div(id="header", style="height:32px")
+            div(style="width:100px; font-size:24px; font-weight:bold; display:inline-block; padding: 0px 5px; text-align:left",id="timeHeader") 00:00:00
+            div(style="width:100px; font-size:24px; font-weight:bold; display:inline-block; padding: 0px 5px; text-align:left;",id="lapsHeader") 0/0
+        thead
+            tr(style="text-align:left")
+                th(style="width:30px", class="pos") Pos
+                th(style="width:30px; text-align:center", class='num') #
+                th(style="width:200px;", class="name") Name
+                th(style="width:50px;text-align:center", class='gap') Gap
+                th(style="width:50px;text-align:center", class='int') Int
+                th(style="width:80px;text-align:center", class="bestLap") Best Lap
+                th(style="width:80px;text-align:center", class="lastLap1") Last Lap
+                //th(style="width:100px", class="lastLap2") 
+                //th(style="width:100px", class="lastLap3") 
+                th(style="width:50px;text-align:center", class="delta") Delta 
+        tbody(id='table')

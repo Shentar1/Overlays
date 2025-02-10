@@ -1,0 +1,45 @@
+{
+  "name": "overlays",
+  "version": "0.6.0",
+  "description": "maybe not a virus",
+  "private": true,
+  "main": "main.js",
+  "author": "Daniel VanderLinde",
+  "scripts": {
+    "start": "node ./bin/www",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.19.2",
+    "http-errors": "~1.6.3",
+    "jade": "^0.29.0",
+    "morgan": "~1.9.1",
+    "node-irsdk-mjo": "^1.0.1",
+    "plotly.js-dist": "^2.33.0",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "electron": "^30.0.9",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "iRacingOverlay",
+    "productName": "iRacing Overlay",
+    "copyright": "Daniel VanderLinde",
+    "win": {
+      "target": "nsis",
+      "icon": "build/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "extraFiles":[
+      "changelog.txt"
+    ]
+  }
+  }

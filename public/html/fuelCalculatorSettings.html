@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fuel Calculator Settings</title>
+        <link rel="stylesheet" href="../stylesheets/style.css">
+        <script src ="../socket.io/socket.io.js"></script>
+        <script src="../javascripts/dropDownOptions.js"></script>
+    </head>
+    <body>
+        <div class="preview">
+            <img src="../images/fuelCalculator.bmp" class="preview"/>
+        </div>
+        <div style="padding-top: 5%;"></div>
+        <div class="settings">
+            <p id="link"></p>
+            <table style="width:100%; table-layout: fixed; background-color: transparent;">
+                <tr>
+                    <td>
+                        <button id="toggleFuelOverlay" class="toggleButton">Toggle Overlay</button>
+                    </td>
+                    <td>
+                        <button type="button" id="lockFuelOverlay" class="toggleButton">Lock Overlay</button>
+                    </td>
+                    <td class="zoomslidecontainer" style="column-span:2;">
+                        <label for="zoomRange" style="text-align: left; width:80px; display:inline-block; padding-left: 10px;">Scale: 10</label>
+                        <input type="range" min="5" max="30" value="10" class="zoomslider" id="zoomRange"/>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr id="headerDisplay" >
+                    <td>
+                        <span style="color:white; text-align: right; width: 150px;">Header Display:</span>
+                    </td>
+                    <td>
+                        <select id="header1" onchange="selectChanged(this)"></select>
+                    </td>
+                    <td>
+                        <select id="header2" onchange="selectChanged(this)"></select>
+                    </td>
+                    <td>
+                        <select id="header3" onchange="selectChanged(this)"></select>
+                    </td>
+                </tr>
+                <tr id="footerDisplay">
+                    <td>
+                        <span style="color:white; text-align: right; width: 150px;">Footer Display:</span>
+                    </td>
+                    <td>
+                        <select id="footer1" onchange="selectChanged(this)"></select>
+                    </td>
+                    <td>
+                        <select id="footer2" onchange="selectChanged(this)"></select>
+                    </td>
+                    <td>
+                        <select id="footer3" onchange="selectChanged(this)"></select>
+                    </td>
+                </tr>
+            </table>
+            
+            
+        </div>
+    </body>
+    <script>
+        var socket = io(); 
+        socket.emit('getFuelOverlayStatus',(response)=>{
+            document.getElementById("link").innerHTML = "localhost:" + response.port + "/fuelCalculator"
+        });
+        var selectOptions = document.getElementsByTagName('select');
+        dropDownOptions.forEach(e => {
+            for(var i = 0; i<selectOptions.length; i++){
+                var option = document.createElement('option');
+                option.text = e;
+                option.value = e;
+                selectOptions[i].add(option);
+            }
+        });
+        document.getElementById('toggleFuelOverlay').onclick = ()=>{
+            var openFuelOverlayButton = document.getElementById('toggleFuelOverlay')
+            socket.emit('OpenFuelCalculator');
+        }
+        document.getElementById('lockFuelOverlay').onclick = ()=> {
+            socket.emit("lockFuelOverlay")
+        }
+        document.getElementById('zoomRange').oninput = ()=>{
+            document.getElementById('zoomRange').previousElementSibling.innerHTML = 'Scale: ' + zoomRange.value;
+            socket.emit('fuelCalculatorZoomChanged',document.getElementById('zoomRange').value)
+        }
+        socket.on('fuelOverlayToggled',(open)=>{
+            var button = document.getElementById('toggleFuelOverlay')
+            if(open){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        })
+        socket.on('fuelOverlayLockStateChanged', (locked)=>{
+            var button = document.getElementById('lockFuelOverlay')
+            if(locked){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        })
+        socket.on('fuelCalculatorZoomChanged',(zoom)=>{
+            var zoomRange = document.getElementById('zoomRange');
+            zoomRange.value = zoom;
+            zoomRange.previousElementSibling.innerHTML = 'Scale: ' + zoom;
+            
+        });
+        socket.on('setFuelCalculatorSelects',(header1,header2,header3,footer1,footer2,footer3)=>{
+            var selects = document.getElementsByTagName('select');
+            dropDownOptions.forEach(function (value, i){
+                if(value == header1){
+                    selects[0].selectedIndex = i
+                }
+                if(value == header2){
+                    selects[1].selectedIndex = i
+                }
+                if(value == header3){
+                    selects[2].selectedIndex = i
+                }
+                if(value == footer1){
+                    selects[3].selectedIndex = i
+                }
+                if(value == footer2){
+                    selects[4].selectedIndex = i
+                }
+                if(value == footer3){
+                    selects[5].selectedIndex = i
+                }
+            })
+        })
+        
+        function selectChanged(element){
+            socket.emit('fuelCalculatorSelectChanged', element.value, element.id);
+        }
+    </script>
+</html>

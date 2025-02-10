@@ -1,0 +1,38 @@
+TODO:
+    GENERAL: 
+        Allow font customization on all overlays
+        Add credits, copyright, and contact information in the app
+    FUEL CALCULATOR:
+    PIT STOP HELPER:
+        NEW OVERLAY IDEA:
+            Show distance to pit stall
+                only while in pit lane
+            Warn of distance to pit entry line
+                only on approach to pits
+            estimate time lost to cars on track
+    RELATIVE:
+        Show Safety Rating if enabled
+            Shows safety class with background color
+        Show car branding if enabled by user - switch exists, implementation required
+        Show Pit notifications if enabled by user
+    INPUT DISPLAY:
+        Add wheel rotation
+        Add Speed
+        Add selected gear
+    STANDINGS:
+        NEW OVERLAY IDEA:
+            Overview of race positions
+            Updated less often than other overlays
+            many varied customizable options:
+                Use Live Positions if enabled
+                    This will make it act more like the relative relying on live telemetry rather than the session results variables
+                    Requires the user to request all car data in iRacing (63)
+                Show Best Lap per driver if enabled
+                Show Last n Laps per driver if enabled
+                Show Delta between best/last laps and other drivers if enabled
+                Show Gap to Leader if enabled
+                Show Interval between Cars on track if enabled
+                Show Pit lap/time if enabled
+                Show Tyre Compound if enabled
+                Show License if enabled
+                Show iRating if enabled

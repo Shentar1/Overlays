@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fuel Calculator Settings</title>
+        <link rel="stylesheet" href="../stylesheets/style.css">
+        <script src ="../socket.io/socket.io.js"></script>
+        <script src="../javascripts/dropDownOptions.js"></script>
+    </head>
+    <body>
+        <div class="preview">
+            <img src="../images/relative.bmp" class="preview" />
+        </div>
+        <div style="padding-top: 5%;"></div>
+        <div class="settings">
+            <p id="link"></p>
+            <table style="width:100%; table-layout: fixed; background-color: transparent;">
+            <tbody>
+                <tr>
+                    <td>
+                        <button id="toggleRelativeOverlay" class="toggleButton">Toggle Overlay</button>
+                    </td>
+                    <td>
+                        <button type="button" id="lockRelativeOverlay" class="toggleButton">Lock Overlay</button>
+                    </td>
+                    <td class="zoomslidecontainer">
+                        <label for="zoomRange" style="text-align: left; width:80px; display:inline-block; padding-left: 10px">Scale: 10</label>
+                        <input type="range" min="5" max="30" value="10" class="zoomslider" id="zoomRange" onchange=""/>
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="carsAhead">Cars Ahead: </label>
+                        <input id="carsAhead" type="number" class="numberUpDown" value="3" onchange="changeCarCount()"/>
+                    </td>
+                    <td>
+                        <label for="carsBehind">Cars Behind: </label>
+                        <input id="carsBehind" type="number" class="numberUpDown" value="3" onchange="changeCarCount()"/>
+                    </td>
+                    <td>
+                        <label for="showTyres">Show Tyre Compound</label>
+                        <label class="switch">
+                            <input type="checkbox" id="showTyres" onchange="sliderChanged(this)"/>
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                <td>
+                    <label for="showBranding">Show Car Brand</label>
+                    <label class="switch">
+                        <input type="checkbox" id="showBranding" onchange="sliderChanged(this)"/>
+                        <span class="slider"></span>
+                    </label>
+                </td>
+                <td>
+                    <label for="show_iRating">Show iRating</label>
+                    <label class="switch">  
+                        <input type="checkbox" id="show_iRating" onchange="sliderChanged(this)"/>
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+            </tr> 
+            <tr id="headerDisplay" >
+                <td>
+                    <span style="color:white; text-align: right; width: 150px;">Header Display:</span>
+                </td>
+                <td>
+                    <select id="header1" onchange="selectChanged(this)"></select>
+                </td>
+                <td>
+                    <select id="header2" onchange="selectChanged(this)"></select>
+                </td>
+                <td>
+                    <select id="header3" onchange="selectChanged(this)"></select>
+                </td>
+            </tr>
+            <tr id="footerDisplay">
+                <td>
+                    <span style="color:white; text-align: right; width: 150px;">Footer Display:</span>
+                </td>
+                <td>
+                    <select id="footer1" onchange="selectChanged(this)"></select>
+                </td>
+                <td>
+                    <select id="footer2" onchange="selectChanged(this)"></select>
+                </td>
+                <td>
+                    <select id="footer3" onchange="selectChanged(this)"></select>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+    <script src="./relativeSettings.js"></script>
+</html>

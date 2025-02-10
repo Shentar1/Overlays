@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <title>Input Display Settings</title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+    <script src ="../socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="preview">
+        <img src="../images/inputs.png" class="preview"/>
+    </div>
+    <div style="padding-top: 5%;"></div>
+    <div class="settings">
+        <p id="link"></p>
+        <table style="width:100%; table-layout: fixed; background-color: transparent;">
+            <tr>
+                <td>
+                    <button id="toggleInputDisplay" class="toggleButton">Toggle Overlay</button>
+                </td>
+                <td>
+                    <button type="button" id="lockInputDisplay" class="toggleButton">Lock Overlay</button>
+                </td>
+                <td class="zoomslidecontainer" style="column-span:2;">
+                    <label for="zoomRange" style="text-align: left; width:80px; display:inline-block; padding-left: 10px;">Scale: 10</label>
+                    <input type="range" min="5" max="30" value="10" class="zoomslider" id="zoomRange"/>
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        </table>
+        
+        
+    </div>
+</body>
+<script>
+    var socket = io(); 
+    socket.emit('getInputOverlayStatus',(callback)=>{
+        if(callback.enabled){
+            document.getElementById('toggleInputDisplay').style.backgroundColor='#00B7FF'
+        }
+        if(callback.locked){
+            document.getElementById('lockInputDisplay').style.backgroundColor='#00B7FF'
+        }
+        document.getElementById('zoomRange').value = callback.zoom;
+        document.getElementById('zoomRange').previousElementSibling.innerHTML = 'Scale: ' + callback.zoom;
+        document.getElementById("link").innerHTML = "localhost:"+ callback.port+"/inputDisplay"
+    });
+    document.getElementById('toggleInputDisplay').onclick = ()=>{
+        socket.emit('openInputDisplay',(callback)=>{
+            var button = document.getElementById('toggleInputDisplay')
+            if(callback.enabled){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        });
+    }
+    document.getElementById('zoomRange').oninput = ()=>{
+            document.getElementById('zoomRange').previousElementSibling.innerHTML = 'Scale: ' + zoomRange.value;
+            socket.emit('inputDisplayZoomChanged',document.getElementById('zoomRange').value)
+    }
+    document.getElementById('lockInputDisplay').onclick = ()=> {
+        socket.emit("lockInputDisplay",(callback)=>{
+            var button = document.getElementById('lockInputDisplay')
+            if(callback.locked){
+                button.style.backgroundColor = '#00B7FF';
+            }else{
+                button.style.backgroundColor = '#111f';
+            }
+        })
+    }
+    socket.on('inputDisplayZoomChanged',(zoom)=>{
+            var zoomRange = document.getElementById('zoomRange');
+            zoomRange.value = zoom;
+            zoomRange.previousElementSibling.innerHTML = 'Scale: ' + zoom;
+            
+    });
+</script>

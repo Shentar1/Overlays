@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <title>Global Settings</title>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="../javascripts/globalSettings.js"></script>
+    <link rel="stylesheet" href="../stylesheets/style.css"/> 
+</head>
+<body>
+    <div class="settings">
+        <div>
+            <label for="port" id="portLabel">Port: </label>
+            <input id="port" type="number" min="1025" max="60000" onchange="changePort(this)"/>
+        </div>
+        <div>
+            <label for="hideWhenInGarage">Hide Overlays When In Garage: </label>
+            <label class="switch">
+                <input type="checkbox" id="hideWhenInGarage" onchange="sliderChanged(this)"/>
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</body>

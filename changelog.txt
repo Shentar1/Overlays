@@ -1,0 +1,104 @@
+0.2.0: First experimental release
+    Known Issue: Program throws an error while either overlay is closed
+        rectified in 0.2.1
+0.2.1:
+    Fixed unknown value error while any overlay was closed
+0.2.2
+    removed redundant 'home' button from the main application page
+0.3.0
+    GENERAL:
+        Removed unnecessary toolbar
+            The default toolbar is replaced by a custom one, showing only relevant options
+        All overlay windows are the exact size needed for the overlay
+        Main window now fills the whole screen, eliminating ugly white spaces
+        added Overlay URLs for stream applications and remote access
+    RELATIVE:
+        Significantly reworked relative calculations for more accurate positions, in the correct order
+        Added ability to define cars ahead/behind for relative
+        Cars show as red if they have lapped you, and blue if you have lapped them
+0.3.1
+    RELATIVE:
+        added a correction factor for multiclass racing to ensure cars of a different class are displayed correctly
+0.3.2
+    GENERAL:
+        increased font weight to improve overall readability
+
+    RELATIVE:
+        added car class coloring according to iRacing API
+        improved readability of lapped/lapping cars
+0.3.3
+    GENERAL:
+        Changed how overlays are opened/closed to prepare for future options to change conditional hiding
+        Overlays now automatically hide when iRacing is closed, and will show again once iRacing launches, provided they are still enabled
+            future updates will bring this in to a user controlled option.
+
+    FUEL CALCULATOR:
+        Further adjusted Leader's estimated race time and Player's estimated race time for greater accuracy and less frequent changes in refill values
+    
+    RELATIVE:
+        further improved visibility of car numbers in multiclass conditions
+        Attempt to clear the relative table when iRacing closes (may not work yet)
+        Changed formatting of relative interval to be on the front end
+0.3.4
+    GENERAL
+        Fixed error upon closing application while overlays were opened
+    RELATIVE
+        Added Tire Compound images to Relative Table
+0.3.5
+    GENERAL
+        Removed ability to access control panel via web browser
+        Changed corners from rounded to square
+    FUEL CALCULATOR
+        Further improvements to complete lap detection
+        Caution Laps are now ignored
+        One to green (formation laps) are now ignored.
+0.3.6
+    GENERAL
+        Replaced hard-coded hiding of overlays with a manual button and planned expansion for optional automated hiding
+0.4.0
+    NEW OVERLAY:
+        INPUT DISPALY
+            This overlay acts as a replacement of iRacing's 'pedals' display for streaming or for a different style for yourself.
+        INPUT TELEMETRY
+            Like the input display, but shows it as a line graph over 2 seconds
+0.4.1
+    RELATIVE
+        fixed overlay size not changing to fit new cars ahead and cars behind values
+0.4.2
+    FUEL CALCULATOR
+        Refinements to laps remaining calculations for fixed lap races
+0.5.0
+    GENERAL
+        Built the framework to add footer and header data to all applicable overlays
+        Users will be able to select up to 6 variables to show above and below an overlay
+        Empty headers and footers will not be displayed
+        Caught and fixed several release-only bugs and squashed them.
+    RELATIVE
+        Added header and footer functionality to this overlay
+        Added scaling functionality
+    FUEL CALCULATOR
+        Added scaling functionality
+    INPUT DISPLAY
+        Added scaling functionality
+    INPUT TELEMETRY
+        Added scaling functionality
+        Fixed graph not drawing correctly upon exiting and re-entering a session
+        Fixed a typo in the settings page
+0.5.1
+    GENERAL
+        Added ability to change the port used to serve the overlays
+            *Found under Global Settings
+        Added ability to hide the overlays while not driving
+            *Found under Global Settings
+0.5.2
+    GENERAL
+        Included a full changelog file, found in the application install folder
+        Caught "cannot read properties of undefined" errors on exiting application
+        Refactored how data is transmitted to the overlays to reduce load when using multiple instances of one overlay
+    FUEL CALCULATOR
+        improved partial lap detection
+
+To Install:
+Run the executable File. The Installer defaults to a "per user" configuration
+
+This folder contains HIGHLY EXPERIMENTAL versions of this app early in development. The program may break unexpectedly, consume more resources than expected or act in unexpected ways and output poor results. Please describe any bugs and errors as concisely as possible (what overlay, what you were doing while it happened) in https://discord.gg/CZE49yfY9G in #bug-reports

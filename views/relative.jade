@@ -1,0 +1,21 @@
+extends layout 
+
+block content
+    script(src="javascripts/relative.js")
+    table(class="draggable", style="font-size: 14px; width:452px;")
+        div(id="header",style="width:438px")
+            div(style="display:none; width:33%",id="header1")
+            div(style="display:none; width:33%",id="header2")
+            div(style="display:none; width:33%",id="header3")
+        thead 
+            th(style="width:7%") Pos 
+            th(style="width:11%") #
+            th(style="width:59%") Name 
+            th(style="width:23%") Gap 
+        tbody(id='table')
+    div(id="footer", style="width:438px")
+        div(style="display:none; width:33%",id="footer1")
+        div(style="display:none; width:33%",id="footer2")
+        div(style="display:none; width:33%",id="footer3")
+
+       
