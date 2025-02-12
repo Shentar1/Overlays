@@ -162,7 +162,7 @@ function calculateFuel(){
     if(iRacing.telemetry.values.EnterExitReset == 1 && iRacing.telemetry.values.EnterExitReset != EnterExitReset){
         lapFuel = new Array();
         lapStartFuel = iRacing.telemetry.values.FuelLevel;
-        if(iRacing.telemetry.values.LapDistPct > .03) {
+        if(iRacing.telemetry.values.LapDistPct > .01) {
             voidFirstLap = true
         }
         else{
