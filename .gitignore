@@ -1,3 +1,4 @@
 /.gitattributes
 /.lfsconfig
 /dist/
+/node_modules/
