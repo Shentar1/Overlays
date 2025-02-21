@@ -38,12 +38,6 @@ document.onreadystatechange = ()=>{
                     footer3.innerHTML = settings.footer3
                 }   
             }
-            document.body.style.scale = settings.zoom/10;
-            document.body.style.transformOrigin = "0 0"
-            for(var i = 0; i<document.body.children.length; i++){
-                document.body.children[i].style.transformOrigin = "0 0"
-            }
-            socket.emit('sentFuelCalculatorSize', table.scrollWidth, document.body.scrollHeight);
         })
         socket.on('sentFuelCalculatorHeaderData',(header1,header2,header3,footer1,footer2,footer3)=>{
             var a = new Array()
@@ -81,14 +75,6 @@ document.onreadystatechange = ()=>{
             document.getElementById('minFuelPerLap').innerHTML = '0'.toFixed(2);
             document.getElementById('minFuelToAdd').innerHTML = '0'.toFixed(2);
         });
-        socket.on('changeFuelCalculatorZoom',(zoom)=>{
-            document.body.style.scale = zoom/10;
-            document.body.style.transformOrigin = "0 0"
-            for(var i = 0; i<document.body.children.length; i++){
-                document.body.children[i].style.transformOrigin = "0 0"
-            }
-            socket.emit('sentFuelCalculatorSize',table.scrollWidth,document.body.scrollHeight);
-        })
         socket.on('fuelCalculatorSelectChangedDiv',(value,id)=>{
             if(value !='-none-'){
                 document.getElementById(id).style.display = 'table-cell';
@@ -96,7 +82,6 @@ document.onreadystatechange = ()=>{
             }else{
                 document.getElementById(id).style.display = 'none';
             }
-            socket.emit('sentFuelCalculatorSize', table.scrollWidth, document.body.scrollHeight);
         })
     }
 }

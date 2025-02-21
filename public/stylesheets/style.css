@@ -33,11 +33,10 @@ th{
   font-weight: 900;
 }
 #fuelTable{
-  font-size:14px;
+  font-size:4vw;
   transform-origin: 0 0;
 }
 #fuelTable thead tr th{
-  font-size:14px;
   border-bottom:1px #ff7b00 solid;
 }
 td{
@@ -255,7 +254,7 @@ input:checked + .slider:before {
   background-color: #000000c8; 
   color:white;
   text-align:center; 
-  font-size: 12px;
+  font-size: 3vw;
 }
 #header{
   border-bottom:2px solid #00B7FF;

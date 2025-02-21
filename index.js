@@ -361,13 +361,6 @@ io.on('connection',(socket)=>{
       settings:fuelCalculatorSettings
     })
   });
-  socket.on('sentFuelCalculatorSize', (width, height)=>{
-    fuelCalculatorInitialSize = [width,height];
-    fuelCalculatorWindow.resizable = true;
-    fuelCalculatorWindow.setSize(Math.ceil(width*fuelCalculatorSettings.zoom/10),Math.ceil(height*(fuelCalculatorSettings.zoom/10)));
-    fuelCalculatorWindow.setPosition(fuelCalculatorSettings.x,fuelCalculatorSettings.y);
-    fuelCalculatorWindow.resizable = false;
-  });
   socket.on('lockFuelOverlay', ()=>{
     if(fuelCalculatorWindow != undefined){
       fuelCalculatorWindow.setMovable(!fuelCalculatorWindow.movable)
@@ -397,7 +390,9 @@ io.on('connection',(socket)=>{
   });
   socket.on('fuelCalculatorZoomChanged',(zoom)=>{
     fuelCalculatorSettings.zoom = zoom;
-    socket.broadcast.emit('changeFuelCalculatorZoom', zoom);
+    fuelCalculatorWindow.resizable = true;
+    fuelCalculatorWindow?fuelCalculatorWindow.setSize(Math.ceil(338*fuelCalculatorSettings.zoom/10),Math.ceil(136*fuelCalculatorSettings.zoom/10)):0
+    fuelCalculatorWindow.resizable=false
   })
   socket.on('OpenRelative', () =>{
     if(relativeWindow == undefined){
@@ -768,6 +763,8 @@ function openFuelCalculator() {
     maximizable: false,
     resizable:false,
     alwaysOnTop: true,
+    width:Math.ceil(338*fuelCalculatorSettings.zoom/10),
+    height:Math.ceil(136*fuelCalculatorSettings.zoom/10),
     x:fuelCalculatorSettings.x,
     y:fuelCalculatorSettings.y,
     show:fuelCalculatorSettings.enabled,
