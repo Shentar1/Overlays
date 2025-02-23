@@ -52,13 +52,6 @@ document.onreadystatechange = ()=>{
             for(var i = 0; i<document.body.children.length; i++){
                 document.body.children[i].style.transformOrigin = "0 0"
             }
-            socket.emit('sentRelativeSize', table.scrollWidth, document.body.scrollHeight, (response)=>{
-                if(response.status == "ok"){
-                    setInterval(()=> {
-                        socket.emit("requestRelativeData");
-                    }, 1000/60);
-                }
-            });
         });
         socket.on('sentRelativeHeaderData',(header1,header2,header3,footer1,footer2,footer3)=>{
             var a = new Array()
@@ -181,19 +174,6 @@ document.onreadystatechange = ()=>{
             }else{
                 document.getElementById(id).style.display = 'none';
             }
-            socket.emit('sentRelativeSize', table.scrollWidth, document.body.scrollHeight,(response)=>{
-        
-            });
-        })
-        socket.on('changeRelativeZoom',(zoom)=>{
-            document.body.style.scale = zoom/10;
-            document.body.style.transformOrigin = "0 0"
-            for(var i = 0; i<document.body.children.length; i++){
-                document.body.children[i].style.transformOrigin = "0 0"
-            }
-            socket.emit('sentRelativeSize',table.scrollWidth,document.body.scrollHeight,(response)=>{
-    
-            });
         })
     }
 }
@@ -201,19 +181,19 @@ function initializeTable(t, ra, rb) {
     t.innerHTML = "";
     for (var i = 0; i < ra + rb + 1; i++) {
         tr = t.insertRow();
-        tr.style.height = '19px';
+        tr.style.height = '5vw';
         td1 = tr.insertCell();
         td1.style.textAlign = 'center';
-        td1.style.width='30px';
+        td1.style.width='6';
         td2 = tr.insertCell();
         td2.style.textAlign = 'center';
-        td2.style.width='50px';
+        td2.style.width='11vw';
         td3 = tr.insertCell();
 
         var soft = document.createElement('img');
         soft.src='images/soft.png';
-        soft.style.height='14px';
-        soft.style.width='14px';
+        soft.style.height='4vw';
+        soft.style.width='4vw';
         soft.style.verticalAlign = 'text-top';
         soft.style.paddingRight = '5px';
         soft.style.paddingTop = '1px';
@@ -221,8 +201,8 @@ function initializeTable(t, ra, rb) {
 
         var medium = document.createElement('img');
         medium.src='images/medium.png';
-        medium.style.height='14px';
-        medium.style.width='14px';
+        medium.style.height='4vw';
+        medium.style.width='4vw';
         medium.style.verticalAlign = 'text-top';
         medium.style.paddingRight = '5px';
         medium.style.paddingTop = '1px';
@@ -231,8 +211,8 @@ function initializeTable(t, ra, rb) {
 
         var hard = document.createElement('img');
         hard.src='images/hard.png';
-        hard.style.height='14px';
-        hard.style.width='14px';
+        hard.style.height='4vw';
+        hard.style.width='4vw';
         hard.style.verticalAlign = 'text-top';
         hard.style.paddingRight = '5px';
         hard.style.paddingTop = '1px';
@@ -241,8 +221,8 @@ function initializeTable(t, ra, rb) {
 
         var inter = document.createElement('img');
         inter.src='images/inter.png';
-        inter.style.height='14px';
-        inter.style.width='14px';
+        inter.style.height='4vw';
+        inter.style.width='4vw';
         inter.style.verticalAlign = 'text-top';
         inter.style.paddingRight = '5px';
         inter.style.paddingTop = '1px';
@@ -251,16 +231,16 @@ function initializeTable(t, ra, rb) {
 
         var wet = document.createElement('img');
         wet.src='images/wet.png';
-        wet.style.height='14px';
-        wet.style.width='14px';
+        wet.style.height='4vw';
+        wet.style.width='4vw';
         wet.style.verticalAlign = 'text-top';
         wet.style.paddingRight = '5px';
         wet.style.paddingTop = '1px';
         wet.style.display = "none";
         
         var manufacturerImg = document.createElement('img');
-        manufacturerImg.style.height='14px';
-        manufacturerImg.style.width='14px';
+        manufacturerImg.style.height='4vw';
+        manufacturerImg.style.width='4vw';
         manufacturerImg.style.verticalAlign = 'text-top';
         manufacturerImg.style.paddingTop = '1px';
         manufacturerImg.style.paddingRight = '5px';
@@ -274,18 +254,18 @@ function initializeTable(t, ra, rb) {
         nameDiv.style.whiteSpace='nowrap';
         nameDiv.style.paddingRight = '5px';
         nameDiv.style.paddingTop = '1px';
-        nameDiv.style.width = '170px';
+        nameDiv.style.width = '37vw';
 
         var iRatingDiv = document.createElement('div');
         iRatingDiv.style.display = 'none';
-        iRatingDiv.style.width = '40px';
-        iRatingDiv.style.height = '14px';
+        iRatingDiv.style.width = '9vw';
+        iRatingDiv.style.height = '4vw';
         iRatingDiv.style.marginTop = '2px';
         iRatingDiv.style.backgroundColor = '#FFFA';
         iRatingDiv.style.borderRadius = '2px';
         iRatingDiv.style.color = 'black';
         iRatingDiv.style.textAlign = 'center'
-        iRatingDiv.style.fontSize = '12px';
+        iRatingDiv.style.fontSize = '3vw';
         
         
 
@@ -298,19 +278,13 @@ function initializeTable(t, ra, rb) {
         td3.appendChild(nameDiv);
         td3.appendChild(iRatingDiv);
 
-        td3.style.width = '250px';
+        td3.style.width = '55vw';
         td3.style.overflow ='hidden';
         td3.style.display = 'flex';
 
         td4 = tr.insertCell();
         td4.style.textAlign = 'center';
-        td4.style.width='100px';
+        td4.style.width='22vw';
     }
     t.rows[ra].style.backgroundColor = '#FF02';
-    document.getElementById('header').style.width = table.scrollWidth.toString() + 'px';
-    document.getElementById('footer').style.width = table.scrollWidth.toString() + 'px';
-
-    socket.emit('sentRelativeSize', table.scrollWidth, document.body.scrollHeight,(response)=>{
-        
-    });
 }

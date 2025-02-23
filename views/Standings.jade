@@ -2,20 +2,20 @@ extends layout
 
 block content
     script(src="javascripts/standings.js")
-    table(class="draggable", style="font-size: 14px;")
-        div(id="header",class="draggable", style="height:32px")
-            div(style="width:100px; font-size:24px; font-weight:bold; display:inline-block; padding: 0px 5px; text-align:left",id="timeHeader") 00:00:00
-            div(style="width:100px; font-size:24px; font-weight:bold; display:inline-block; padding: 0px 5px; text-align:left;",id="lapsHeader") 0/0
+    table(class="draggable", style="font-size: 2vw;")
+        div(id="header",class="draggable", style="height:5vw; width:100vw")
+            div(style="width:16vw; font-size:4vw; font-weight:bold; display:inline-block; padding: 0px 1vw; text-align:left",id="timeHeader") 00:00:00
+            div(style="width:16vw; font-size:4vw; font-weight:bold; display:inline-block; padding: 0px 1vw; text-align:left;",id="lapsHeader") 0/0
         thead
             tr(style="text-align:left")
-                th(style="width:30px", class="pos") Pos
-                th(style="width:30px; text-align:center", class='num') #
-                th(style="width:200px;", class="name") Name
-                th(style="width:50px;text-align:center", class='gap') Gap
-                th(style="width:50px;text-align:center", class='int') Int
-                th(style="width:80px;text-align:center", class="bestLap") Best Lap
-                th(style="width:80px;text-align:center", class="lastLap1") Last Lap
+                th(style="width:5vw", class="pos") Pos
+                th(style="width:5vw; text-align:center", class='num') #
+                th(style="width:40vw;", class="name") Name
+                th(style="width:8vw;text-align:center", class='gap') Gap
+                th(style="width:8vw;text-align:center", class='int') Int
+                th(style="width:13vw;text-align:center", class="bestLap") Best Lap
+                th(style="width:13vw;text-align:center", class="lastLap1") Last Lap
                 //th(style="width:100px", class="lastLap2") 
                 //th(style="width:100px", class="lastLap3") 
-                th(style="width:50px;text-align:center", class="delta") Delta 
+                th(style="width:8vw;text-align:center", class="delta") Delta 
         tbody(id='table')

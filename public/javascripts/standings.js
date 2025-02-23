@@ -38,13 +38,6 @@ document.onreadystatechange = ()=>{
                 showCarBrand = response.showCarBrand;
                 show_iRating = response.show_iRating;
                 showTyres = response.showTyres;
-                zoom = response.zoom;
-                document.body.style.scale = zoom/10;
-                document.body.style.transformOrigin = "0 0"
-                for(var i = 0; i<document.body.children.length; i++){
-                    document.body.children[i].style.transformOrigin = "0 0"
-                }
-                socket.emit('sentStandingsSize', body.scrollWidth, document.body.scrollHeight);
             }
         });
         socket.on('sentStandingsData', (standingsData, playerCarId)=>{
@@ -100,7 +93,7 @@ document.onreadystatechange = ()=>{
                     num[i+1].style.textAlign = 'center';
                     Array.from(name[i+1].children).filter(el=>el.tagName==='SPAN').forEach(span => span.innerHTML = _name);
                     Array.from(name[i+1].children).filter(el=>el.tagName==='DIV').forEach(div => div.innerHTML = _iRating);
-                    name[i+1].querySelector('span').style.paddingLeft = '5px';
+                    name[i+1].querySelector('span').style.paddingLeft = '1vw';
                     gap[i+1].innerHTML = _gap;
                     gap[i+1].style.textAlign = 'center';
                     int[i+1].innerHTML = _interval;
@@ -174,11 +167,11 @@ document.onreadystatechange = ()=>{
                         let iRating = document.getElementsByClassName('iRating');
                         iRating[i].style.display = 'inline-block';
                         let n = document.getElementsByClassName('nameSpan');
-                        n[i].style.width= '120px';
+                        n[i].style.width= '20vw';
                     }else{
                         document.getElementsByClassName('iRating')[i].style.display = 'none';
                         let n = document.getElementsByClassName('nameSpan')[i];
-                        n.style.width= '150px';
+                        n.style.width= '25vw';
                     }
                     if(i<visibleRows){
                         body.rows[i].style.display = 'table-row';  
@@ -237,17 +230,6 @@ document.onreadystatechange = ()=>{
             }else{
                 document.getElementById(id).style.display = 'none';
             }
-            socket.emit('sentStandingsSize', body.scrollWidth, document.body.scrollHeight);
-        })
-        socket.on('changeStandingsZoom',(zoom)=>{
-            document.body.style.scale = zoom/10;
-            document.body.style.transformOrigin = "0 0"
-            for(var i = 0; i<document.body.children.length; i++){
-                document.body.children[i].style.transformOrigin = "0 0"
-            }
-            socket.emit('sentStandingsSize',body.scrollWidth,document.body.scrollHeight,(response)=>{
-    
-            });
         })
         
         // Add CSS for animations
@@ -255,10 +237,10 @@ document.onreadystatechange = ()=>{
         style.textContent = `
             @keyframes slideAndFadeOut {
                 0% { transform: translateX(0); opacity: 1; }
-                100% { transform: translateX(100px); opacity: 0; }
+                100% { transform: translateX(17vw); opacity: 0; }
             }
             @keyframes slideAndFadeIn {
-                0% { transform: translateX(-100px); opacity: 0; }
+                0% { transform: translateX(-17vw); opacity: 0; }
                 100% { transform: translateX(0); opacity: 1; }
             }
         `;
@@ -306,7 +288,6 @@ document.onreadystatechange = ()=>{
                 }, 500);
             }, 10000);
         }
-        header.style.width = body.scrollWidth + 'px';
     }
 }
 function addTableRow(table,body){
@@ -322,7 +303,7 @@ function addTableRow(table,body){
             compounds.forEach(compound => {
                 let img = document.createElement('img');
                 img.src = `../images/tires/${compound}.png`;
-                img.style.height = '17px';
+                img.style.height = '3vw';
                 img.style.display = 'none';
                 img.style.position = 'absolute';
                 img.style.right = '0';
@@ -331,11 +312,11 @@ function addTableRow(table,body){
                 td.appendChild(img);
             });
         let nameSpan = document.createElement('span');
-        nameSpan.style.marginLeft = '20px';
+        nameSpan.style.marginLeft = '3vw';
         nameSpan.style.overflow = 'hidden';
         nameSpan.style.textOverflow = 'ellipsis'; 
         nameSpan.style.whiteSpace = 'nowrap';
-        nameSpan.style.width = '140px';
+        nameSpan.style.width = '23vw';
         nameSpan.style.display = 'inline-block';
         nameSpan.style.verticalAlign = 'middle';
         nameSpan.className = 'nameSpan';
@@ -343,15 +324,15 @@ function addTableRow(table,body){
         let iRatingDiv = document.createElement('div');
         iRatingDiv.className = 'iRating';
         iRatingDiv.style.display = 'none';
-        iRatingDiv.style.width = '35px';
-        iRatingDiv.style.height = '14px';
-        iRatingDiv.style.marginTop = '2px';
-        iRatingDiv.style.marginRight = '20px';
+        iRatingDiv.style.width = '6vw';
+        iRatingDiv.style.height = '2vw';
+        iRatingDiv.style.marginTop = '0.5vw';
+        iRatingDiv.style.marginRight = '6vw';
         iRatingDiv.style.backgroundColor = '#FFFA';
-        iRatingDiv.style.borderRadius = '2px';
+        iRatingDiv.style.borderRadius = '0.5';
         iRatingDiv.style.color = 'black';
         iRatingDiv.style.textAlign = 'center'
-        iRatingDiv.style.fontSize = '12px';
+        iRatingDiv.style.fontSize = '2vw';
         iRatingDiv.style.textOverflow = 'none';
         iRatingDiv.style.overflow = 'hidden';
         iRatingDiv.style.whiteSpace = 'nowrap';
@@ -366,13 +347,12 @@ function addTableRow(table,body){
             logo.src = `../images/${manufacturer}.png`;
             logo.style.display = 'none';
             logo.style.position = 'absolute';
-            logo.style.height = '17px';
-            logo.style.left = '2px';
+            logo.style.height = '3vw';
+            logo.style.left = '0.5vw';
             logo.style.top = '50%';
             logo.style.transform = 'translateY(-50%)';
             td.appendChild(logo);
         });
         }
     }
-    socket.emit('sentStandingsSize', body.scrollWidth, document.body.scrollHeight)
 }

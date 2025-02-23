@@ -3,16 +3,16 @@ extends layout
 block content 
     script(src="/javascripts/plotly-2.32.0.min.js")
     script(src="/javascripts/inputDisplay.js", type='module')
-    div(id="page", style="width:125px")
-        div(style="width:75px; height:100px; display:inline-block; vertical-align:top; background-color: #000A; text-align:center")
-            div(id="gearDiv", style="width:75px; height:75px; position:absolute; color:white; line-height:15px; font-weight:600;")
+    div(id="page", style="width:100vw, height:84vw")
+        div(style="width:60vw; height:75vw; display:inline-block; vertical-align:top; background-color: #000A; text-align:center")
+            div(id="gearDiv", style="width:60vw; height:60vw; position:absolute; color:white; line-height:12vw; font-weight:600; font-size:12vw")
                 br
                 |N
-            img(src="/images/basicWheel.png",style="height:75px; width:75px; display:block", id="wheel", class="draggable")
-            div(style="height:25px; width:100%; text-align:center; color:#ddd", id="speed", class="draggable") 200km/h
-        div(id="inputContainer", style="height:100px; width:50px; background-color: #000A; display:inline-block", class="draggable")
-            div(id="inputDisplay", style="height:65px; width:50px;")
-            div(id="inputValues",style="height:33px; text-align:left; color:#ddd; font-weight:600; padding-top:2px")
-                div(style="height:33px; width:16px; line-height:16px; padding-right:1px; writing-mode: vertical-lr; display:inline-block; font-size:12px") 100%
-                div(style="height:33px; width:16px; line-height:16px; padding-right:1px; writing-mode: vertical-lr; display:inline-block; font-size:12px") 100%
-                div(style="height:33px; width:16px; line-height:16px; writing-mode: vertical-lr; display:inline-block; font-size:12px") 100%
+            img(src="/images/basicWheel.png",style="height:60vw; width:60vw; display:block", id="wheel", class="draggable")
+            div(style="height:20vw; width:100%; text-align:center; font-size:12vw; color:#ddd", id="speed", class="draggable") 200km/h
+        div(id="inputContainer", style="height:75vw; width:40vw; background-color: #000A; display:inline-block", class="draggable")
+            div(id="inputDisplay", style="height:52vw; width:40vw;")
+            div(id="inputValues",style="height:26.4vw; text-align:left; color:#ddd; font-weight:600; padding-top:2px")
+                div(style="height:26.4vw; width:12vw; line-height:12.8vw; padding-right:1vw; writing-mode: vertical-lr; display:inline-block; font-size:8vw") 100%
+                div(style="height:26.4vw; width:12vw; line-height:12.8vw; padding-right:1vw; writing-mode: vertical-lr; display:inline-block; font-size:8vw") 100%
+                div(style="height:26.4vw; width:12vw; line-height:12.8vw; writing-mode: vertical-lr; display:inline-block; font-size:8vw") 100%

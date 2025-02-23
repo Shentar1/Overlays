@@ -410,16 +410,6 @@ io.on('connection',(socket)=>{
       socket.emit('relativeOverlayToggled', relativeSettings.enabled);
     }
   });
-  socket.on('sentRelativeSize',(width,height,callback)=>{
-    if(relativeWindow != undefined){
-      relativeWindow.resizable = true;
-      relativeWindow.setSize(Math.ceil(width*relativeSettings.zoom/10),Math.ceil(height*relativeSettings.zoom/10));
-      callback({
-        status:"ok"
-      })
-      relativeWindow.resizable = false;
-    }
-  });
   socket.on('lockRelativeOverlay', ()=>{
     if(relativeWindow != undefined){
       relativeWindow.setMovable(!relativeWindow.movable)
@@ -475,7 +465,9 @@ io.on('connection',(socket)=>{
   })
   socket.on('relativeZoomChanged',(zoom)=>{
     relativeSettings.zoom = zoom;
-    socket.broadcast.emit('changeRelativeZoom', zoom);
+    relativeWindow.resizable = true;
+    relativeWindow.setSize(Math.ceil(452*zoom/10),Math.ceil(220*zoom/10));
+    relativeWindow.resizable = false;
   })
 
   socket.on("hideAllOverlays",(callback)=>{
@@ -522,21 +514,10 @@ io.on('connection',(socket)=>{
       port:globalSettings.port,
     })
   })
-  socket.on('sentInputDisplaySize',(x,y)=>{
-    inputDisplayWindow.resizable = true;
-    if(inputDisplayWindow != undefined){
-      inputDisplayWindow.setSize(Math.ceil(x*inputDisplaySettings.zoom/10),Math.ceil(y*inputDisplaySettings.zoom/10));
-    }
-    inputDisplayWindow.resizable = false;
-  })
   socket.on('inputDisplayZoomChanged',(zoom)=>{
     inputDisplaySettings.zoom = zoom;
-    socket.broadcast.emit('changeInputDisplayZoom', zoom);
-  })
-  socket.on('getInputDisplaySettings', (callback)=>{
-    callback({
-      zoom:inputDisplaySettings.zoom,
-    })
+    inputDisplayWindow.resizable = true;
+    inputDisplayWindow.setSize(Math.ceil(125*inputDisplaySettings.zoom/10),Math.ceil(105*inputDisplaySettings.zoom))
   })
 
   socket.on('openInputTelemetry',(callback)=>{
@@ -570,16 +551,10 @@ io.on('connection',(socket)=>{
       port:globalSettings.port,
     })
   })
-  socket.on('sentInputTelemetrySize',(x,y)=>{
-    inputTelemetryWindow.resizable = true;
-    if(inputTelemetryWindow != undefined){
-      inputTelemetryWindow.setSize(Math.ceil(x*inputTelemetrySettings.zoom/10),Math.ceil(y*inputTelemetrySettings.zoom/10));
-    }
-    inputTelemetryWindow.resizable = false;
-  })
   socket.on('inputTelemetryZoomChanged',(zoom)=>{
     inputTelemetrySettings.zoom = zoom;
-    socket.broadcast.emit('changeInputTelemetryZoom', zoom);
+    inputTelemetryWindow.resizable = true;
+    inputTelemetryWindow.setSize(Math.ceil(300*inputTelemetrySettings.zoom/10),Math.ceil(100*inputTelemetrySettings.zoom/10))
   })
   socket.on('getInputTelemetrySettings', (callback)=>{
     callback({
@@ -637,16 +612,11 @@ io.on('connection',(socket)=>{
       port:globalSettings.port,
     });
   });
-  socket.on('sentStandingsSize',(x,y)=>{
-    standingsWindow.resizable = true;
-    if(standingsWindow != undefined){
-      standingsWindow.setSize(Math.ceil(x*standingsSettings.zoom/10),Math.ceil(y*standingsSettings.zoom/10));
-    }
-    standingsWindow.resizable = false;
-  });
   socket.on('standingsZoomChanged',(zoom)=>{
     standingsSettings.zoom = zoom;
-    socket.broadcast.emit('changeStandingsZoom', zoom);
+    standingsWindow.resizable = true;
+    standingsWindow.setSize(Math.ceil(601*standingsSettings.zoom/10), Math.ceil((51+(20*16))*standingsSettings.zoom/10));
+    standingsWindow.resizable = false;
   });
   socket.on('getStandingsSettings',(response)=>{
     response({
@@ -742,6 +712,8 @@ function openRelative() {
     maximizable: false,
     resizable:false,
     alwaysOnTop: true,
+    width:Math.ceil(452*relativeSettings.zoom/10),
+    height:Math.ceil(220*relativeSettings.zoom/10),
     x:relativeSettings.x,
     y:relativeSettings.y,
     show:relativeSettings.enabled,
@@ -788,6 +760,8 @@ function openInputDisplay(){
     alwaysOnTop: true,
     x:inputDisplaySettings.x,
     y:inputDisplaySettings.y,
+    width:Math.ceil(125*inputDisplaySettings.zoom/10),
+    height:Math.ceil(105*inputDisplaySettings.zoom/10),
     show:inputDisplaySettings.enabled,
     movable: !inputDisplaySettings.locked,
     webPreferences: {
@@ -807,6 +781,8 @@ function openInputTelemetry(){
     maximizable: false,
     resizable:false,
     alwaysOnTop: true,
+    width:Math.ceil(300*inputTelemetrySettings.zoom/10),
+    height:Math.ceil(100*inputTelemetrySettings.zoom/10),
     x:inputTelemetrySettings.x,
     y:inputTelemetrySettings.y,
     show:inputTelemetrySettings.enabled,
@@ -828,6 +804,8 @@ function openStandings(){
     maximizable: false,
     resizable:false,
     alwaysOnTop: true,
+    width:Math.ceil(601*standingsSettings.zoom/10),
+    height:Math.ceil((51+(20*16))*standingsSettings.zoom/10),
     x:standingsSettings.x,
     y:standingsSettings.y,
     show:standingsSettings.enabled,

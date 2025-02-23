@@ -6,11 +6,6 @@ var speed = 0;
 var gear = 0;
 document.onreadystatechange = ()=>{
     if(document.readyState == 'complete'){
-        var body = document.getElementById('page');
-        socket.emit('getInputDisplaySettings',(callback)=>{
-            body.style.scale = callback.zoom/10
-            setElementChildrenToTopLeft(body);
-        })
         var trace1 = {
             y: [clutch, brake, throttle],
             marker:{
@@ -74,21 +69,5 @@ document.onreadystatechange = ()=>{
             var speedDisplay = document.getElementById('speed');
             isNaN(speed)?speedDisplay.innerHTML = 0 + 'km/h':speedDisplay.innerHTML = (speed*3.6).toFixed(0) + 'km/h';
         })
-        socket.emit('sentInputDisplaySize',body.scrollWidth,body.scrollHeight);
-    }
-    socket.on('changeInputDisplayZoom',(zoom)=>{
-        body.style.scale = zoom/10
-        setElementChildrenToTopLeft(body);
-        socket.emit('sentInputDisplaySize',document.getElementById('page').scrollWidth,body.scrollHeight);
-
-    })
-}
-function setElementChildrenToTopLeft(element){
-    element.style.transformOrigin = "0 0";
-    for(var i = 0; i<element.children.length; i++){
-        setElementChildrenToTopLeft(element.children[i]);
-    }
-    if(element.id =='wheel'||element.id=='gearDiv'){
-        element.style.transformOrigin = 'center'
     }
 }

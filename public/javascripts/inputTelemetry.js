@@ -1,4 +1,3 @@
-
 var throttle = new Array(241);
 var brake = new Array(241);
 var clutch = new Array(241);
@@ -61,9 +60,7 @@ document.onreadystatechange = ()=>{
                 showgrid:true,
                 gridcolor:'#ddda',
             },
-            autosize:false,
-            width:300,
-            height:100,
+            autosize:true,
             margin:{
                 l:0,
                 r:0,
@@ -81,11 +78,9 @@ document.onreadystatechange = ()=>{
             clutch.length = callback.time*60 + 1;
             steering.length = callback.time*60 + 1;
             layout.xaxis.range = [0,callback.time*60]
-            body.style.scale = callback.zoom/10;
-            setElementChildrenToTopLeft(body);
         })
         inputs = ([steeringTrace,clutchTrace,throttleTrace, brakeTrace]);
-        var chart = Plotly.newPlot('telemetryChart', inputs,layout,{displayModeBar:false, staticPlot:true});
+        var chart = Plotly.newPlot('telemetryChart', inputs,layout,{displayModeBar:false, staticPlot:true, responsive:true});
         socket.on('sentDriverInputs',(inputs)=>{
             throttle.push(inputs.throttle);
             brake.push(inputs.brake);
@@ -105,14 +100,8 @@ document.onreadystatechange = ()=>{
             }
             Plotly.redraw('telemetryChart');
         })
-        socket.emit('sentInputTelemetrySize',body.scrollWidth,body.scrollHeight);
+        
     }
-    socket.on('changeInputTelemetryZoom',(zoom)=>{
-        body.style.scale = zoom/10
-        setElementChildrenToTopLeft(body);
-        socket.emit('sentInputTelemetrySize',body.scrollWidth,body.scrollHeight);
-
-    })
     socket.on('changeInputTelemetryTimeRange', (time)=>{
         throttle.length = time*60 + 1;
         brake.length = time*60 + 1;
@@ -121,10 +110,4 @@ document.onreadystatechange = ()=>{
         layout.xaxis.range=[0,time*60]
         Plotly.redraw('telemetryChart');
     })
-}
-function setElementChildrenToTopLeft(element){
-    element.style.transformOrigin = "0 0";
-    for(var i = 0; i<element.children.length; i++){
-        setElementChildrenToTopLeft(element.children[i]);
-    }
 }
