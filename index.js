@@ -466,7 +466,7 @@ io.on('connection',(socket)=>{
   socket.on('relativeZoomChanged',(zoom)=>{
     relativeSettings.zoom = zoom;
     relativeWindow.resizable = true;
-    relativeWindow.setSize(Math.ceil(452*zoom/10),Math.ceil(220*zoom/10));
+    relativeWindow.setSize(Math.ceil(452*zoom/10), Math.ceil((17+17+28+((relativeSettings.rowsAhead + relativeSettings.rowsAhead)*28)*zoom/10)));
     relativeWindow.resizable = false;
   })
 
@@ -713,7 +713,7 @@ function openRelative() {
     resizable:false,
     alwaysOnTop: true,
     width:Math.ceil(452*relativeSettings.zoom/10),
-    height:Math.ceil(220*relativeSettings.zoom/10),
+    height:Math.ceil(28*(relativeSettings.rowsAhead+relativeSettings.rowsBehind+1)),
     x:relativeSettings.x,
     y:relativeSettings.y,
     show:relativeSettings.enabled,

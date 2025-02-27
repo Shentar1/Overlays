@@ -2,16 +2,16 @@ extends layout
 
 block content
     script(src="javascripts/relative.js")
-    table(class="draggable", style="font-size: 4vw;")
+    table(class="draggable", style="font-size: 4vw; width:100vw; height:49vw")
         div(id="header")
             div(style="display:none; width:33%",id="header1")
             div(style="display:none; width:33%",id="header2")
             div(style="display:none; width:33%",id="header3")
         thead 
-            th(style="width:7%") Pos 
-            th(style="width:11%") #
-            th(style="width:59%") Name 
-            th(style="width:23%") Gap 
+            th(style="width:7vw") Pos 
+            th(style="width:11vw") #
+            th(style="width:59vw") Name 
+            th(style="width:23vw") Gap 
         tbody(id='table')
     div(id="footer")
         div(style="display:none; width:33%",id="footer1")
